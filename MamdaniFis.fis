@@ -1,0 +1,53 @@
+[System]
+Name='MamdaniFis'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=0
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='GSR_13'
+Range=[-2.59820802317327 8.40263681567993]
+NumMFs=4
+MF1='mf1':'trimf',[-6.265 -2.598 1.069]
+MF2='mf2':'trimf',[-2.598 1.069 4.736]
+MF3='mf3':'trimf',[1.069 4.736 8.403]
+MF4='mf4':'trimf',[4.736 8.403 12.07]
+
+[Input2]
+Name='GSR_27'
+Range=[-3.1813332592771 8.37056943508036]
+NumMFs=4
+MF1='mf1':'trimf',[-7.032 -3.181 0.6693]
+MF2='mf2':'trimf',[-3.181 0.6693 4.52]
+MF3='mf3':'trimf',[0.6693 4.52 8.371]
+MF4='mf4':'trimf',[4.52 8.371 12.22]
+
+[Input3]
+Name='ECG_29'
+Range=[-1.85528902772491 8.9653241672301]
+NumMFs=4
+MF1='mf1':'trimf',[-5.462 -1.855 1.752]
+MF2='mf2':'trimf',[-1.855 1.752 5.358]
+MF3='mf3':'trimf',[1.752 5.358 8.965]
+MF4='mf4':'trimf',[5.358 8.965 12.57]
+
+[Output1]
+Name='Arousal'
+Range=[1 9]
+NumMFs=7
+MF1='Very Very Low':'trimf',[-0.3333 1 2.333]
+MF2='Very Low':'trimf',[1 2.333 3.667]
+MF3='Low':'trimf',[2.333 3.667 5]
+MF4='Medium':'trimf',[3.667 5 6.333]
+MF5='High':'trimf',[5 6.333 7.667]
+MF6='Very High':'trimf',[6.333 7.667 9]
+MF7='Very Very High':'trimf',[7.667 9 10.33]
+
+[Rules]

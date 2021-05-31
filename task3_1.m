@@ -8,7 +8,7 @@ dataset = load('C:\Users\gxhan\Documents\Universita\Esami_Correnti\Intelligent S
 dataset = table2array(dataset.dataset);
 
 %Load results obtained from sequential feature selection
-data_prep = load('data_preparation_results_50.mat');
+data_prep = load('data_preparation_results_mean.mat');
 
 %Data for training
 X_train_arousal = data_prep.X_train_best_arousal;

@@ -3,8 +3,7 @@ clear
 close all
 clc
 
-
-times_sequentialfs = 50;
+times_sequentialfs = 100;
 outliers_removal_method = 'median';
 
 %% Preparation of Data
@@ -107,10 +106,6 @@ features_valence = [zeros(1,54); 1:54]';
 for i = 1:times_sequentialfs
     disp("**** ITER ****");
     disp(i);
-    
-%     [idx_arousal,weights] = relieff(X_train,t_arousal_train, 10);
-%     idx_arousal = idx_arousal(1:30);
-%     X_train_lowered = X_train(:, idx_arousal);
 
     %cv = cvpartition(t_arousal_train, 'k', 10);
     opt = statset('display','iter','useParallel',true);
@@ -177,7 +172,7 @@ disp("Sorting...");
 features_valence = sortrows(features_valence, 1, 'descend');
 disp(features_valence);
  
-%% Last things to finalize 
+%% Preparing the outputs for other tasks 
 
 %Select best 10 features for both arousal and valence
 features_arousal_best = features_arousal(1:10, 2);
