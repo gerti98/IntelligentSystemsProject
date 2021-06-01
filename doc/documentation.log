@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  31 MAY 2021 22:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  31 MAY 2021 23:12
 entering extended mode
 **./documentation.tex
 (documentation.tex
@@ -315,20 +315,20 @@ File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 (chapters/task4_1.aux))
 \openout1 = `documentation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -407,7 +407,7 @@ d
 File: img/marchio_unipi_pant541-eps-converted-to.pdf Graphic file (type pdf)
 <use img/marchio_unipi_pant541-eps-converted-to.pdf>
 Package pdftex.def Info: img/marchio_unipi_pant541-eps-converted-to.pdf  used o
-n input line 63.
+n input line 64.
 (pdftex.def)             Requested size: 362.37569pt x 193.1007pt.
 [1
 
@@ -423,44 +423,99 @@ nipi_pant541-eps-converted-to.pdf>] (documentation.toc)
 (chapters/task3_1.tex
 (C:\Users\gxhan\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
-)) [2
+)
+<img/arousal_mlp_45.png, id=20, 274.52562pt x 99.87312pt>
+File: img/arousal_mlp_45.png Graphic file (type png)
+<use img/arousal_mlp_45.png>
+Package pdftex.def Info: img/arousal_mlp_45.png  used on input line 30.
+(pdftex.def)             Requested size: 274.52495pt x 99.87288pt.
+<img/arousal_mlp_45_regression.png, id=22, 790.45313pt x 790.45313pt>
+File: img/arousal_mlp_45_regression.png Graphic file (type png)
+<use img/arousal_mlp_45_regression.png>
+Package pdftex.def Info: img/arousal_mlp_45_regression.png  used on input line 
+35.
+(pdftex.def)             Requested size: 452.9679pt x 452.97522pt.
+<img/arousal_mlp_45_regression_with_testset.png, id=23, 564.60938pt x 564.60938
+pt>
+File: img/arousal_mlp_45_regression_with_testset.png Graphic file (type png)
+<use img/arousal_mlp_45_regression_with_testset.png>
+Package pdftex.def Info: img/arousal_mlp_45_regression_with_testset.png  used o
+n input line 40.
+(pdftex.def)             Requested size: 271.7835pt x 271.78479pt.
 
-]
+[2
+
+ <./img/arousal_mlp_45.png>]
+<img/valence_mlp_80.png, id=30, 274.52562pt x 99.87312pt>
+File: img/valence_mlp_80.png Graphic file (type png)
+<use img/valence_mlp_80.png>
+Package pdftex.def Info: img/valence_mlp_80.png  used on input line 45.
+(pdftex.def)             Requested size: 274.52495pt x 99.87288pt.
+ [3 <./img/arousal_mlp_45_regression.png (PNG copy)>]
+<img/valence_mlp_80_regression.png, id=34, 790.45313pt x 790.45313pt>
+File: img/valence_mlp_80_regression.png Graphic file (type png)
+<use img/valence_mlp_80_regression.png>
+Package pdftex.def Info: img/valence_mlp_80_regression.png  used on input line 
+51.
+(pdftex.def)             Requested size: 452.9679pt x 452.97522pt.
+<img/valence_mlp_80_regression_with_testset.png, id=35, 564.60938pt x 564.60938
+pt>
+File: img/valence_mlp_80_regression_with_testset.png Graphic file (type png)
+<use img/valence_mlp_80_regression_with_testset.png>
+Package pdftex.def Info: img/valence_mlp_80_regression_with_testset.png  used o
+n input line 56.
+(pdftex.def)             Requested size: 271.7835pt x 271.78479pt.
+ [4 <./img/arousal_mlp_45_regression_with_testset.png (PNG copy)> <./img/valenc
+e_mlp_80.png>] [5 <./img/valence_mlp_80_regression.png (PNG copy)>]
+<img/arousal_rbf_1_3.png, id=43, 377.91188pt x 399.4925pt>
+File: img/arousal_rbf_1_3.png Graphic file (type png)
+<use img/arousal_rbf_1_3.png>
+Package pdftex.def Info: img/arousal_rbf_1_3.png  used on input line 63.
+(pdftex.def)             Requested size: 271.7835pt x 287.3052pt.
+<img/valence_rbf_0_7.png, id=44, 377.91188pt x 399.4925pt>
+File: img/valence_rbf_0_7.png Graphic file (type png)
+<use img/valence_rbf_0_7.png>
+Package pdftex.def Info: img/valence_rbf_0_7.png  used on input line 68.
+(pdftex.def)             Requested size: 271.7835pt x 287.3052pt.
+)
+[6 <./img/valence_mlp_80_regression_with_testset.png (PNG copy)> <./img/arousal
+_rbf_1_3.png>] [7 <./img/valence_rbf_0_7.png>]
 \openout2 = `chapters/task3_3.aux'.
 
- (chapters/task3_3.tex) [3
+ (chapters/task3_3.tex) [8
 
 
 
 ]
 \openout2 = `chapters/task4_1.aux'.
 
- (chapters/task4_1.tex) [4
+
+(chapters/task4_1.tex) [9
 
 
 
-] (documentation.aux
-(chapters/task3_1.aux) (chapters/task3_3.aux) (chapters/task4_1.aux)) ) 
+] (documentation.aux (chapters/task3_1.aux)
+(chapters/task3_3.aux) (chapters/task4_1.aux)) ) 
 Here is how much of TeX's memory you used:
- 8639 strings out of 480236
- 129720 string characters out of 2880557
- 665804 words of memory out of 3000000
- 25080 multiletter control sequences out of 15000+200000
+ 8695 strings out of 480236
+ 131452 string characters out of 2880557
+ 666813 words of memory out of 3000000
+ 25127 multiletter control sequences out of 15000+200000
  541464 words of font info for 52 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,5n,77p,356b,1703s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/User
-s/gxhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-><C:/Users/gxhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
-mbxti10.pfb><C:/Users/gxhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmr12.pfb><C:/Users/gxhan/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmr17.pfb><C:/Users/gxhan/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/gxhan/AppData/Local/Programs/MiKTe
-X/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/gxhan/AppData/Local/Progr
-ams/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on documentation.pdf (5 pages, 146602 bytes).
+ 72i,6n,77p,356b,1703s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/gxhan/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/gxhan/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/g
+xhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:
+/Users/gxhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17
+.pfb><C:/Users/gxhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/
+cm/cmr6.pfb><C:/Users/gxhan/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
+sfonts/cm/cmti12.pfb><C:/Users/gxhan/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/amsfonts/cm/cmtt10.pfb>
+Output written on documentation.pdf (10 pages, 585855 bytes).
 PDF statistics:
- 53 PDF objects out of 1000 (max. 8388607)
+ 83 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 
