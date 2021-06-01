@@ -5,7 +5,8 @@ clc
 
 
 % Config variables
-% 0-> only two_classes CNN, 1->only four_classes CNN, 2->both
+% who_to_train: 0-> only two_classes CNN, 1->only four_classes CNN, 2->both
+
 who_to_train = 2; 
 
 
@@ -35,10 +36,17 @@ fracTrain = 0.8;
 [imdsTrain_two,imdsTest_two] = splitEachLabel(imds_two,fracTrain,'randomize');
 [imdsTrain_four,imdsTest_four] = splitEachLabel(imds_four,fracTrain,'randomize');
 
-imageAugmenter = imageDataAugmenter('RandRotation',[-20,20], 'RandXReflection', true, 'RandXTranslation', [-10 10], 'RandYTranslation', [-10 10]);
+%Method for image augmentation
+imageAugmenter = imageDataAugmenter('RandRotation',[-20,20],...
+    'RandXReflection', true, ...
+    'RandXTranslation', [-10 10], ...
+    'RandYTranslation', [-10 10]);
+
 augimds_two = augmentedImageDatastore(base_img_size,imdsTrain_two,'DataAugmentation',imageAugmenter);
 augimds_four = augmentedImageDatastore(base_img_size,imdsTrain_four,'DataAugmentation',imageAugmenter);
 
+
+%CNN layers for two-classes classification (fear and disgust emotions)
 leaky_layers_two = [
     imageInputLayer(size(base_img))
     
@@ -62,6 +70,7 @@ leaky_layers_two = [
     classificationLayer
 ];
 
+%CNN layers for four-classes classification 
 leaky_layers_four = [
     imageInputLayer(size(base_img))
     
@@ -93,6 +102,8 @@ leaky_layers_four = [
 ];
 
 
+% Traces of other experiments
+% ---------------------------
 % layers = [
 %     imageInputLayer(size(base_img))
 %     
@@ -138,7 +149,7 @@ leaky_layers_four = [
 options_sgdm_two = trainingOptions('sgdm', ...
 'InitialLearnRate', 0.01, ...
 'MiniBatchSize', 40, ...
-'MaxEpochs', 100, ...
+'MaxEpochs', 200, ...
 'Shuffle','every-epoch', ...
 'ValidationData', imdsTest_two, ...
 'ValidationFrequency', 20, ...
@@ -164,6 +175,9 @@ else
     net_sgdm_leaky_two = trainNetwork(augimds_two,leaky_layers_two,options_sgdm_two);
 end
 
+
+% Traces of other experiments
+% ---------------------------
 % options_adam = trainingOptions('adam', ...
 % 'InitialLearnRate', 0.01, ...
 % 'MiniBatchSize', 20, ...
@@ -173,8 +187,7 @@ end
 % 'ValidationFrequency', 4, ...
 % 'Verbose', false, ...
 % 'Plots', 'training-progress');
-% 
-% 
+%
 % options_rmsprop = trainingOptions('rmsprop', ...
 % 'InitialLearnRate', 0.01, ...
 % 'MiniBatchSize', 20, ...
@@ -184,14 +197,12 @@ end
 % 'ValidationFrequency', 20, ...
 % 'Verbose', false, ...
 % 'Plots', 'training-progress');
-
 % net_sgdm = trainNetwork(augimds,layers,options_sgdm);
 % net_adam = trainNetwork(augimds,layers,options_adam);
 % net_rmsprop = trainNetwork(augimds,layers,options_rmsprop);
-
 % net_adam_leaky = trainNetwork(augimds,leaky_layers,options_adam);
 % net_rmsprop_leaky = trainNetwork(augimds,leaky_layers,options_rmsprop);
-%% Assess Performance
+%% Performance Assessment
 
 if who_to_train == 2
     predLabels_sgdm_leaky_two = classify(net_sgdm_leaky_two,imdsTest_two);
@@ -228,22 +239,19 @@ else
 end
 
 
-
+% Traces of other experiments
+% ---------------------------
 % predLabels_sgdm = classify(net_sgdm,imdsTest);
 % predLabels_adam = classify(net_adam,imdsTest);
 % predLabels_rmsprop = classify(net_rmsprop,imdsTest);
-
 % predLabels_adam_leaky = classify(net_adam_leaky,imdsTest);
 % predLabels_rmsprop_leaky = classify(net_rmsprop_leaky,imdsTest);
-
-
 % accuracy_sgdm = sum(predLabels_sgdm == testLabels)/numel(testLabels);
 % fprintf('Accuracy sgdm is %8.2f%%\n',accuracy_sgdm*100);
 % accuracy_adam = sum(predLabels_adam == testLabels)/numel(testLabels);
 % fprintf('Accuracy adam is %8.2f%%\n',accuracy_adam*100);
 % accuracy_rmsprop = sum(predLabels_rmsprop == testLabels)/numel(testLabels);
 % fprintf('Accuracy rmsprop is %8.2f%%\n',accuracy_rmsprop*100);
-
 % accuracy_adam_leaky = sum(predLabels_adam_leaky == testLabels)/numel(testLabels);
 % fprintf('Accuracy adam leaky is %8.2f%%\n',accuracy_adam_leaky*100);
 % accuracy_rmsprop_leaky = sum(predLabels_rmsprop_leaky == testLabels)/numel(testLabels);
