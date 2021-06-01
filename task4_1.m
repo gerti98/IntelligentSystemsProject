@@ -6,7 +6,9 @@ clc
 
 % Config variables
 % 0-> only two_classes CNN, 1->only four_classes CNN, 2->both
-who_to_train = 1; 
+who_to_train = 2; 
+
+
 % Preparing labels
 anger_cell = cell(1,250);
 anger_cell(:) = {'Anger'};
@@ -33,7 +35,7 @@ fracTrain = 0.8;
 [imdsTrain_two,imdsTest_two] = splitEachLabel(imds_two,fracTrain,'randomize');
 [imdsTrain_four,imdsTest_four] = splitEachLabel(imds_four,fracTrain,'randomize');
 
-imageAugmenter = imageDataAugmenter('RandRotation',[-20,20], 'RandXReflection', true);
+imageAugmenter = imageDataAugmenter('RandRotation',[-20,20], 'RandXReflection', true, 'RandXTranslation', [-10 10], 'RandYTranslation', [-10 10]);
 augimds_two = augmentedImageDatastore(base_img_size,imdsTrain_two,'DataAugmentation',imageAugmenter);
 augimds_four = augmentedImageDatastore(base_img_size,imdsTrain_four,'DataAugmentation',imageAugmenter);
 
