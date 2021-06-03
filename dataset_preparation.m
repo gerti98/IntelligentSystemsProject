@@ -3,14 +3,15 @@ clear
 close all
 clc
 
-times_sequentialfs = 15;
+%Config variables
+times_sequentialfs = 100;
 outliers_removal_method = 'median';
 
 %% Preparation of Data
 
 
 % Removal of non numerical values
-dataset = load('C:\Users\gxhan\Documents\Universita\Esami_Correnti\Intelligent Systems\IntelligentSystemsProject\datasets\dataset.mat'); 
+dataset = load('datasets\dataset.mat'); 
 dataset = table2array(dataset.dataset);
 inf_val = isinf(dataset);
 [rows_inf, col_inf] = find(inf_val == 1);
@@ -34,13 +35,14 @@ while index < 25
     [GC_arousal,GR_arousal] = groupcounts(t_arousal);
     [GC_valence,GR_valence] = groupcounts(t_valence);
     
+    %Getting values of interest for the lowest and highest class and their
+    %specific indexes
     [M,I] = max(GC_arousal);
     [m,i] = min(GC_arousal);
     max_val_ar = GR_arousal(I);
     min_val_ar = GR_arousal(i);
     min_val_indexes_ar = find(t_arousal == min_val_ar);
     max_val_indexes_ar = find(t_arousal == max_val_ar);
-    
     
     [M2, I2] = max(GC_valence);
     [m2, i2] = min(GC_valence);
@@ -50,11 +52,10 @@ while index < 25
     max_val_indexes_va = find(t_valence == max_val_va);
     
     % In order to not increase the most common class of valence(arousal)
-    % the relative indexes are deleted from the process in case of data 
-    % augmentation of least common class of arousal(valence) 
+    % the relative indexes are deleted from the lowest class indexes of
+    % arousal(valence)
     min_val_indexes_ar_common = intersect(min_val_indexes_ar,max_val_indexes_va);
     min_val_indexes_ar = setxor(min_val_indexes_ar,min_val_indexes_ar_common);
-
     min_val_indexes_va_common = intersect(min_val_indexes_va,max_val_indexes_ar);
     min_val_indexes_va = setxor(min_val_indexes_va,min_val_indexes_va_common);
     
@@ -73,6 +74,8 @@ while index < 25
     % selected data will be multiplied by the randomizer
     randomizer = 1 + (rand(1) - 0.5)/10;
     
+    %Indexes of this process has been found experimentally: those gave good
+    %results for both dataset with mean and median outlier removal
     if (index <= 5) | ((index >= 16) & (index <=19))
         t_valence = [t_valence; t_valence(min_val_indexes_va)];
         t_arousal = [t_arousal; t_arousal(min_val_indexes_va)];
@@ -121,9 +124,11 @@ for i = 1:times_sequentialfs
     disp("**** ITER ****");
     disp(i);
 
+    %K-fold cross validation will be used to train and test the neural
+    %network that lies in the fun2 function
     cv = cvpartition(t_arousal_train, 'k', 10);
     opt = statset('display','iter','useParallel',true);
-    inmodel = sequentialfs(@fun2,X_train,t_arousal_train,'cv', cv,'Options', opt);
+    inmodel = sequentialfs(@fun2,X_train,t_arousal_train,'cv', cv,'Options', opt, 'nFeatures', 5);
     
     % Fetch useful indexes from result of latter sequentialfs
     i = 1;
@@ -134,8 +139,6 @@ for i = 1:times_sequentialfs
         end
         i = i+1;
     end
-    
-    % features_arousal = unique(features_arousal);
     
     disp("*** Features: ");
     disp(features_arousal);
@@ -150,15 +153,16 @@ features_arousal = sortrows(features_arousal, 1, 'descend');
 disp(features_arousal);
 
 %% Feature selection for valence
+
+%Same thing as before, this time for valence
 for i = 1:times_sequentialfs
     disp("**** ITER ****");
     disp(i);
 
     cv = cvpartition(t_valence_train, 'k', 10);
     opt = statset('display','iter','useParallel',true);
-    inmodel = sequentialfs(@fun2,X_train,t_valence_train,'cv', cv,'Options', opt);
-    
-    % Fetch useful indexes from result of latter sequentialfs
+    inmodel = sequentialfs(@fun2,X_train,t_valence_train,'cv', cv,'Options', opt, 'nFeatures', 5);
+
     i = 1;
     for val = inmodel
         if val == 1
@@ -167,8 +171,6 @@ for i = 1:times_sequentialfs
         end
         i = i+1;
     end
-    
-    % features_arousal = unique(features_arousal);
     
     disp("*** Features: ");
     disp(features_valence);
@@ -184,11 +186,13 @@ disp(features_valence);
  
 %% Preparing the outputs for other tasks 
 
+
+
 %Select best 10 features for both arousal and valence
 features_arousal_best = features_arousal(1:10, 2);
 features_valence_best = features_valence(1:10, 2);
-features_arousal_best3 = features_arousal(1:3, 2);
 
+%Get relative data from those 10 selected features
 X_train_best_arousal = X_train(:,features_arousal_best)';
 X_train_best_valence = X_train(:,features_valence_best)';
 X_test_best_arousal = X_test(:,features_arousal_best)';
@@ -198,22 +202,20 @@ t_train_best_valence = t_valence_train';
 t_test_best_arousal = t_arousal_test';
 t_test_best_valence = t_valence_test';
 
-%For task 3.3
+%Select best 3 features for task 3.3
+features_arousal_best3 = features_arousal(1:3, 2);
 X_train_best3_arousal = X_train(:,features_arousal_best3)';
 X_test_best3_arousal = X_test(:,features_arousal_best3)';
 
 
 %% Function for sequentialfs
 function err = fun2(x_train, t_train, x_test, t_test)
-    %since 1038 samples => 1 output and 1 input (2 neurons) N_hidden = Nsamples/(10*(Ninput+Noutput)) ~= 60 
-    
+    %~1000 samples for training
     net = fitnet(60);
     net.trainParam.showWindow=0;
     xx = x_train';
     tt = t_train';
     net = train(net, xx, tt);
-    
-    % test the network 
     y=net(x_test'); 
     err = perform(net,t_test',y);
 end

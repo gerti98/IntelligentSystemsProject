@@ -6,7 +6,6 @@ clc
 
 % Config variables
 % who_to_train: 0-> only two_classes CNN, 1->only four_classes CNN, 2->both
-
 who_to_train = 2; 
 
 
@@ -23,7 +22,7 @@ emotions_labels_four = categorical([anger_cell disgust_cell fear_cell happiness_
 emotions_labels_two = categorical([disgust_cell fear_cell]);
 
 % Base image to get the proper size for the first layer of the CNN
-base_img = imread('datasets/images/anger_to_use/10011.jpg');
+base_img = imread('datasets/images/10011.jpg');
 base_img_size = size(base_img);
 
 % Creation of the two datastore, first one is for a 4-classes
@@ -146,6 +145,7 @@ leaky_layers_four = [
 
 %% Training
 
+%Training options for two CNNs
 options_sgdm_two = trainingOptions('sgdm', ...
 'InitialLearnRate', 0.01, ...
 'MiniBatchSize', 40, ...
@@ -204,6 +204,7 @@ end
 % net_rmsprop_leaky = trainNetwork(augimds,leaky_layers,options_rmsprop);
 %% Performance Assessment
 
+%Plotting of confusion matrix for given test set
 if who_to_train == 2
     predLabels_sgdm_leaky_two = classify(net_sgdm_leaky_two,imdsTest_two);
     predLabels_sgdm_leaky_four = classify(net_sgdm_leaky_four,imdsTest_four);

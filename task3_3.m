@@ -4,7 +4,7 @@ close all
 clc
 
 %Load datasets
-dataset_ = load('C:\Users\gxhan\Documents\Universita\Esami_Correnti\Intelligent Systems\IntelligentSystemsProject\datasets\dataset.mat'); 
+dataset_ = load('datasets\dataset.mat'); 
 dataset = table2array(dataset_.dataset);
 
 %Load results obtained from sequential feature selection
@@ -28,104 +28,27 @@ nbins = 15;
 binWidth = 0.5;
 
 x_values_37 = X_train_arousal(1, :);
-% x_values_1_sorted = sort(x_values_37);
 x_values_51 = X_train_arousal(2, :);
-% x_values_2_sorted = sort(x_values_51);
 x_values_12 = X_train_arousal(3, :);
-% x_values_3_sorted = sort(x_values_12);
 y_values = t_train_arousal;
 
-
+%Get indexes of samples for each specific output
 y_indexes_one = find(y_values == 1);
-y_indexes_two = find(y_values == y_values(10));
+y_indexes_two = find(y_values == y_values(10)); %The value 7/3 gave some problems to be recognized
 y_indexes_three = find(y_values == 11/3);
 y_indexes_four = find(y_values == 5);
 y_indexes_five = find(y_values == 19/3);
 y_indexes_six = find(y_values == 23/3);
 y_indexes_seven = find(y_values == 9);
 
-% figure
-% t = tiledlayout(7,3);
-% 
-% nexttile
-% histogram(x_values_37(y_indexes_one),'BinWidth',binWidth);
-% title('Histogram of feature 1 when y: 1');
-% nexttile
-% histogram(x_values_51(y_indexes_one),'BinWidth',binWidth);
-% title('Histogram of feature 2 when y: 1');
-% nexttile
-% histogram(x_values_12(y_indexes_one),'BinWidth',binWidth);
-% title('Histogram of feature 3 when y: 1');
-% nexttile
-% 
-% histogram(x_values_37(y_indexes_two),'BinWidth',binWidth);
-% title('Histogram of feature 1 when y: 2.333');
-% nexttile
-% histogram(x_values_51(y_indexes_two),'BinWidth',binWidth);
-% title('Histogram of feature 2 when y: 2.333');
-% nexttile
-% histogram(x_values_12(y_indexes_two),'BinWidth',binWidth);
-% title('Histogram of feature 3 when y: 2.333');
-% nexttile
-% 
-% histogram(x_values_37(y_indexes_three),'BinWidth',binWidth);
-% title('Histogram of feature 1 when y: 3.667');
-% nexttile
-% histogram(x_values_51(y_indexes_three),'BinWidth',binWidth);
-% title('Histogram of feature 2 when y: 3.667');
-% nexttile
-% histogram(x_values_12(y_indexes_three),'BinWidth',binWidth);
-% title('Histogram of feature 3 when y: 3.667');
-% nexttile
-% 
-% histogram(x_values_37(y_indexes_four),'BinWidth',binWidth);
-% title('Histogram of feature 1 when y: 5');
-% nexttile
-% histogram(x_values_51(y_indexes_four),'BinWidth',binWidth);
-% title('Histogram of feature 2 when y: 5');
-% nexttile
-% histogram(x_values_12(y_indexes_four),'BinWidth',binWidth);
-% title('Histogram of feature 3 when y: 5');
-% nexttile
-% 
-% histogram(x_values_37(y_indexes_five),'BinWidth',binWidth);
-% title('Histogram of feature 1 when y: 6.333');
-% nexttile
-% histogram(x_values_51(y_indexes_five),'BinWidth',binWidth);
-% title('Histogram of feature 2 when y: 6.333');
-% nexttile
-% histogram(x_values_12(y_indexes_five),'BinWidth',binWidth);
-% title('Histogram of feature 3 when y: 6.333');
-% nexttile
-% 
-% histogram(x_values_37(y_indexes_six),'BinWidth',binWidth);
-% title('Histogram of feature 1 when y: 7.667');
-% nexttile
-% histogram(x_values_51(y_indexes_six),'BinWidth',binWidth);
-% title('Histogram of feature 2 when y: 7.667');
-% nexttile
-% histogram(x_values_12(y_indexes_six),'BinWidth',binWidth);
-% title('Histogram of feature 3 when y: 7.667');
-% nexttile
-% 
-% histogram(x_values_37(y_indexes_seven),'BinWidth',binWidth);
-% title('Histogram of feature 1 when y: 9');
-% nexttile
-% histogram(x_values_51(y_indexes_seven),'BinWidth',binWidth);
-% title('Histogram of feature 2 when y: 9');
-% nexttile
-% histogram(x_values_12(y_indexes_seven),'BinWidth',binWidth);
-% title('Histogram of feature 3 when y: 9');
-% 
 
-
+% Plot Histogram of features for a specific subset of outputs
 figure
 y_lim = 15;
-
 t = tiledlayout(3,3);
-low_ind = [y_indexes_one y_indexes_two y_indexes_three];
+low_ind = [y_indexes_one y_indexes_two];
 mid_ind = [y_indexes_three y_indexes_four y_indexes_five];
-high_ind = [y_indexes_five y_indexes_six y_indexes_seven];
+high_ind = [y_indexes_six y_indexes_seven];
 
 nexttile
 histogram(x_values_37(low_ind), 'BinWidth',binWidth, 'BinLimits',[-4,10]);
@@ -166,8 +89,7 @@ histogram(x_values_12(high_ind), 'BinWidth',binWidth, 'BinLimits',[-4,10]);
 yline(y_lim, '--r');
 title('Histogram of feature 12 when y: high (7-9]');
 
-% Plot correlations
-
+% Plot Scatterplots between pairs of features to find some correlations
 figure
 t = tiledlayout(1,3);
 nexttile
@@ -180,6 +102,7 @@ nexttile
 scatter(x_values_51, x_values_12);
 title('Scatterplot of feature 51 and feature 12');
 
+% Plot Histogram of features for finding the empirical distribution
 figure
 t = tiledlayout(1,3);
 nexttile
@@ -192,17 +115,11 @@ nexttile
 histogram(x_values_12, 'BinWidth',binWidth);
 title('Histogram of feature 12');
 
-% corr_1 = [x_values_37; y_values]';
-% corr_1 = sortrows(corr_1, 1, 'ascend');
-% corr_2 = [x_values_51; y_values]';
-% corr_2 = sortrows(corr_2, 1, 'ascend');
-% corr_3 = [x_values_12; y_values]';
-% corr_3 = sortrows(corr_3, 1, 'ascend');
-
 
 %% Fuzzy logic systems
 fis = mamfis("Name", "MamdaniFis");
 
+%Inputs configurations
 fis = addInput(fis,[min(x_values_37) max(x_values_37)],'Name', string(best3_features(1)));
 fis = addMF(fis,string(best3_features(1)),'trapmf',[-10 -3 0 2],'Name',"Low");
 fis = addMF(fis,string(best3_features(1)),'trimf',[0 2 4],'Name',"Medium");
@@ -217,20 +134,20 @@ fis = addInput(fis,[min(x_values_12) max(x_values_12)],'Name', string(best3_feat
 fis = addMF(fis,string(best3_features(3)),'trapmf',[-11.59 -3 3 6],'Name',"Low");
 fis = addMF(fis,string(best3_features(3)),'trapmf',[3 6 12 18.7],'Name',"High");
 
+%Output configuration
 fis = addOutput(fis,[1 9],'Name',"Arousal");
 fis = addMF(fis,"Arousal","trimf",[-3 1 5],'Name',"Low");
 fis = addMF(fis,"Arousal","trimf",[1 5 9],'Name',"Medium");
 fis = addMF(fis,"Arousal","trimf",[5 9 13],'Name',"High");
 
+%Rules configuration
 ruleList = [1 1 0 1 1 1;
             2 1 0 1 1 1;
             0 0 1 1 1 1;
             2 1 0 2 1 1;
-            3 1 0 2 1 1;
             2 2 0 3 1 1;
             3 3 0 3 1 1;
-            0 0 2 3 1 1;
             ];
 
 fis = addRule(fis,ruleList);
-evalfis(fis,[1 1 2])
+% evalfis(fis,[1 1 2]);
